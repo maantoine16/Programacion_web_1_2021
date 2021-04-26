@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="stylesheet" href="estilo.css" >
     <title>Formulario</title>
 </head>
 <body>
@@ -15,54 +17,90 @@
         </div>
     
     <div class="row">
-        <form action="pagina1.html" method="POST" id="form1">
+        <form action="pagina1.html" method="POST" class="form" id="form1" >
             <div class="form-group">
                 <label for="nombre">Nombre:</label><br>
-                <input type="text" class="form-control" name="nombre" id="nombre" placeholder="ingresa tu nombre" >
-                <span id="ValNom" class=" textrojo"><b>Error</b></span>
+                <input type="text" class="form-control" name="nombre" id="nombre" placeholder="ingresa tu nombre:" >
+                <span id="valNom" class="textoRojo">Error</span>
             </div>
             <div class="form-group">
                 <label for="email">Direccion de email:</label><br>
                 <input type="email" class="form-control" name="email" id="email" placeholder="ingresa tu email:">
             </div>
+            <div>
+            <select name="n° identificacion">
+                <option value="1">RUT</option>
+                <option value="2">PASAPORTE</option>
+            </select>
+            <input type="text" class="form-control" name="n° identificacion" id="rut" placeholder="ingrese n° identificacion:" >
+            </div>
+            <div>
+                <label for="number">Numero celular:</label><br>
+                <input type="number" class="form-control" name="n° celular" id="numero" placeholder="ingrese su n° celular:">
+            </div>
+            <div>
+                <label for="ciudad">Ingrese Ciudad de Residencia:</label><br>
+                <input type="text" class="form-control" name="ciudad" id="ciudad" placeholder="ingrese su ciudad de residencia:">
+            </div>
+            <div>
+                <label for="comentario">Ingresa tu comentario:</label>
+                <textarea class="form-control" cols="30" rows="1" minlength="50"></textarea>
+               
+               
+            </div>
             <input type="submit" class="btn btn-primary" value="ENVIAR"> <input type="reset" class="btn btn-danger" value="LIMPIAR">
+            </div>
+            <div>
+                <div class="alert alert-danger" role="alert" id="mensaje">
+            </div>
+            </div>
+    </form>
+    </div>
 </body>
-<script src="code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-
-<script src="cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-
-<script src="cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
-
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
 <script>
+
     $(document).ready(function(){
-        $("ValNom").hide();
+        $("#mensaje").hide();
+        $("#valNom").hide();
         $("#nombre").blur(function(){
             var valor=$("#nombre").val().trim();
-            if (valor.lenght==0)
+            if(valor.length==0)
             {
-                $("#nombre").addClass("avisovalidacion");
-                $("#email").show();
+                $("#nombre").addClass("avisoValidacion");
+                $("#email").addClass("avisoValidacion");
+                $("#rut").addClass("avisoValidacion");
+                $("#numero").addClass("avisoValidacion");
+                $("#ciudad").addClass("avisoValidacion");
+                $("#valNom").show();
+                //alert("el nombre no puede estar en blanco");
             }
             else
             {
-                $("#nombre").removeClass("avisovalidacion");
-
-                $("#ValNom").hide();
+                $("#nombre").removeClass("avisoValidacion");
+                $("#email").removeClass("avisoValidacion");
+                $("#rut").removeClass("avisoValidacion");
+                $("#numero").removeClass("avisoValidacion");
+                $("#ciudad").removeClass("avisoValidacion");
+                $("#valNom").hide();
             }
         });
-        $("form1").submit(
+        //$("#email").blur;
+        $("#form1").submit(
             function()
-            { 
+            {
                 var nombre=$("#nombre").val().trim();
                 var email=$("#email").val().trim();
-                if(email.lenght==0 || nombre.lenght==0)
+                if(email.length==0 || nombre.email==0)
                 {
-                   $("#mensaje").html("hay campos vacios");
-                } 
+                    $("#mensaje").show(2000);
+                    $("#mensaje").html("hay campos vacios");
+                    event.preventDefault();
+                }
+
             }
-            
-               
-            
         );
     });
 </script>
